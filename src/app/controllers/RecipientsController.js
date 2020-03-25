@@ -116,6 +116,28 @@ class RecipientsController {
     return res.json(await Recipients.findAll({ order: [['id', 'ASC']] }));
   }
 
+  async show(req, res) {
+    const schema = Yup.object().shape({
+      recipientId: Yup.number()
+        .positive()
+        .required(),
+    });
+
+    if (!(await schema.isValid(req.params))) {
+      return res.status(400).json({ error: 'Invalid Id' });
+    }
+
+    const { recipientId } = req.params;
+
+    const recipient = await Recipients.findByPk(recipientId);
+
+    if (!recipient) {
+      return res.status(401).json({ error: 'Recipient does not exist ' });
+    }
+
+    return res.json(recipient);
+  }
+
   async delete(req, res) {
     const { id } = req.params;
     const recipient = await Recipients.findByPk(id);
