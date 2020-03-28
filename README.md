@@ -1,2 +1,2 @@
 # Aplicação FastFeet
-## para certificação do Bootcamp GoStack Rockseat
+Aplicação desenvolvida para certificação do Bootcamp GoStack da Rockseat
