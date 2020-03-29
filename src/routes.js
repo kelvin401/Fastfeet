@@ -8,7 +8,8 @@ import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveriesController from './app/controllers/DeliveriesController';
-import DeliverymanDeliveryController from './app/controllers/DeliverymanDeliveryController';
+// import DeliverymanDeliveryController from './app/controllers/DeliverymanDeliveryController';
+import DeliveryStatusController from './app/controllers/DeliveryStatusController';
 import NotificationController from './app/controllers/NotificationController';
 
 import authmiddleware from './app/middlewares/auth';
@@ -26,7 +27,13 @@ routes.post('/users', UserController.store);
 routes.get('/recipients', RecipientsController.index);
 
 // list deliveries by deliveryman
-routes.get(`/deliveryman/:id/deliveries`, DeliverymanDeliveryController.index);
+// routes.get(`/deliveryman/:id/deliveries`, DeliverymanDeliveryController.index);
+routes.get('/deliveryman/deliveries', DeliveryStatusController.index);
+routes.get('/deliveryman/:id/deliveries', DeliveryStatusController.show);
+routes.put(
+  '/deliveryman/:deliveryman_id/deliveries/:delivery_id',
+  DeliveryStatusController.update
+);
 
 // middlewares authentication
 routes.use(authmiddleware.loggedIn);

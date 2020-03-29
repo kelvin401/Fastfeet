@@ -109,6 +109,11 @@ class Deliverycontroller {
               as: 'signature',
               attributes: ['id', 'url', 'path'],
             },
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'url', 'path'],
+            },
           ],
         })
       : await Delivery.findAll({
@@ -141,6 +146,13 @@ class Deliverycontroller {
               model: Deliveryman,
               as: 'deliveryman',
               attributes: ['id', 'name'],
+              include: [
+                {
+                  model: File,
+                  as: 'avatar',
+                  attributes: ['name', 'path', 'url'],
+                },
+              ],
             },
             {
               model: File,

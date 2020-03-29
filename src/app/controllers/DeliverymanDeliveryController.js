@@ -1,5 +1,7 @@
 import Delivery from '../models/Delivery';
 import Deliveryman from '../models/Deliveryman';
+import Recipients from '../models/Recipients';
+import File from '../models/File';
 
 class DeliveriesDeliverymanController {
   async index(req, res) {
@@ -9,6 +11,34 @@ class DeliveriesDeliverymanController {
         canceled_at: null,
         end_date: null,
       },
+      include: [
+        {
+          model: Recipients,
+          as: 'recipient',
+          paranoid: false,
+          attributes: [
+            'name',
+            'address',
+            'house_number',
+            'address_additional',
+            'state',
+            'city',
+            'zipcode',
+          ],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
+        },
+      ],
     });
 
     const deliveryman = await Deliveryman.findByPk(req.params.id);

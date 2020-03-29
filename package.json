@@ -1,6 +1,7 @@
 {
-  "name": "desafio-02",
+  "name": "fasfeet",
   "version": "1.0.0",
+  "author": "Kelvin Carvalho",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
